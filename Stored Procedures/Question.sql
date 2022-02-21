@@ -27,7 +27,7 @@ end
 -- selectQuestionAns 700
 
 ---------------------------- Insert ----------------------------
-create proc insertQuestion @id int,@body varchar(30), @type nchar(2), @answer nchar(1)
+create proc insertQuestion @id int,@body varchar(150), @type nchar(2), @answer nchar(1)
 with encryption
 as
 begin
@@ -38,12 +38,13 @@ begin
 		select 'Duplicated Question ID' 
 end
 
---insertQuestion 777,"body n","tf","1"
---selectQuestionAns 777
+--insertQuestion ,"","MC",""
+--insertQuestion 10,"Which of the following is the correct order of a SQL statement?","MC","b"
+--insertQuestion 9,"A command that lets you change one or more field in a table is:","MC","b"
 
 ---------------------------- Update ----------------------------
 --------------- Update Question Ans ---------------
-create proc updateQuestion @id int,@body varchar(30), @type nchar(2), @answer nchar(1)
+create proc updateQuestion @id int,@body varchar(120), @type nchar(2), @answer nchar(1)
 with encryption
 as
 begin
