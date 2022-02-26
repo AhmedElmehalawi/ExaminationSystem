@@ -6,7 +6,7 @@ with encryption
 as
 begin
 	if exists(select QID from Questions where QID = @id)
-		select q.QID , q.QType, q.QBody from Questions q
+		select q.QID , q.QType, q.QBody, q.CrsID from Questions q
 		where QID = @id 
 	else
 		select 'Invalid Question ID'
@@ -23,28 +23,32 @@ begin
 		select 'Invalid Question ID'
 end
 
--- selectQuestion 700
--- selectQuestionAns 700
+-- selectQuestion  15
+-- selectQuestionAns 15
 
 ---------------------------- Insert ----------------------------
-create proc insertQuestion @id int,@body varchar(150), @type nchar(2), @answer nchar(1)
+create proc insertQuestion @id int,@body varchar(30), @type nchar(2), @answer nchar(1), @courseID int
 with encryption
 as
 begin
 	if not exists(select QID from Questions where QID = @id)
-		insert into Questions (QID,QBody,QType,QAnswer)
-		values(@id,@body,@type,@answer)
+	begin
+		if exists(select CourseID from Courses where CourseID = @courseID)
+			insert into Questions (QID,QBody,QType,QAnswer,CrsID)
+			values(@id,@body,@type,@answer,@courseID)
+		else
+			select 'Invalid Course ID'
+		end
 	else
 		select 'Duplicated Question ID' 
 end
 
---insertQuestion ,"","MC",""
---insertQuestion 10,"Which of the following is the correct order of a SQL statement?","MC","b"
---insertQuestion 9,"A command that lets you change one or more field in a table is:","MC","b"
+--insertQuestion 777,"body n","tf","1",2
+--selectQuestionAns 777
 
 ---------------------------- Update ----------------------------
 --------------- Update Question Ans ---------------
-create proc updateQuestion @id int,@body varchar(120), @type nchar(2), @answer nchar(1)
+create proc updateQuestion @id int,@body varchar(30), @type nchar(2), @answer nchar(1)
 with encryption
 as
 begin
