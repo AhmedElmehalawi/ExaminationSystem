@@ -1,5 +1,5 @@
 -----------------------------------------Start Insert ----------------------------------------
-create proc InsertInst @insID int , @CoID int
+create proc InsertInstructor @insID int , @CoID int
 with encryption
 as
 	begin try 
@@ -13,14 +13,14 @@ as
 		select 'Find Error'
 	end catch
 
-	InsertInst 1, 1
+	InsertInstructor 1, 1
 	
 
 ---------------------------------------------End Insert -------------------------------------------
 
 ----------------------------Start Select -----------------------------------------------
 
-create proc SelectIns @InsID int
+create proc SelectInstructor @InsID int
 with encryption
 as
 	begin try 
@@ -34,11 +34,11 @@ as
 		select 'Find Error'
 	end catch
 
-	SelectIns 1
+	SelectInstructor 1
 
 ---------------------------- End Select-----------------------------------------------
 -----------------------------Start Update---------------------------------------------
-alter proc UpdateCoIns @InsID int , @CoID int
+create proc UpdateCoIns @InsID int , @CoID int
 with encryption
 as
 	begin try 
@@ -54,7 +54,7 @@ as
 UpdateCoIns 1, 1
 -----------------------------End Update---------------------------------------------
 ------------------------------Start Delete -------------------------------------------
-create proc DeletIns @InsID int 
+create proc DeletInstructor @InsID int 
 with encryption
 as
 	begin try 
@@ -67,6 +67,6 @@ as
 		select 'Find Error  "DELETE statement conflicted with the REFERENCE constraint "FK_Students_Departments"'
 	end catch
 
-	DeletIns 1
+	DeletInstructor 1
 	
 ----------------------------------End Delete ----------------------------------
