@@ -1,6 +1,6 @@
 
 ----------------------------Report to returns the Student info according to Department Number Parameter -----------------------------------------------
-	create proc SelectStudent @DepID int
+	create proc SelectStudentData @DepID int
 with encryption
 as
 	begin try 
@@ -14,7 +14,7 @@ as
 		select 'Find Error'
 	end catch
 
-	SelectStudent 4
+	SelectStudentData 4
 --------------------------------------End----------------------------------------------
 
 ----------------------------Report that takes the Student ID and returns the grades of the student in all courses-----------------------------------------------
