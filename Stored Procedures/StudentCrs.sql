@@ -20,7 +20,7 @@ as
 
 ----------------------------Select-----------------------------------------------
 
-	create proc SelectStu @sID int
+	create proc SelectStudent @sID int
 with encryption
 as
 	begin try 
@@ -34,12 +34,12 @@ as
 		select 'Find Error'
 	end catch
 
-	SelectStu 1
+	SelectStudent 1
 
 
 ---------------------------- End Select-----------------------------------------------
 -----------------------------Start Update---------------------------------------------
-alter proc UpdateStu @StuID int , @CoID int
+create proc UpdateStudent @StuID int , @CoID int
 with encryption
 as
 	begin try 
@@ -53,10 +53,10 @@ as
 		select 'Find Error'
 	end catch
 
-UpdateStu 2,1
+UpdateStudent 2,1
 -----------------------------Start Update---------------------------------------------
 ------------------------------Start Delete ------------------------------------
-alter proc DeletStu @CoID int 
+create proc DeletStudent @CoID int 
 with encryption
 as
 	begin try 
@@ -69,5 +69,5 @@ as
 		select 'Find Error  "DELETE statement conflicted with the REFERENCE constraint "FK_Students_Departments"'
 	end catch
 
-	DeletStu 1
+	DeletStudent 1
 ----------------------------------End Delete ----------------------------------
