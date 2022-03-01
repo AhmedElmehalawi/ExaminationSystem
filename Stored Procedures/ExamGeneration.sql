@@ -5,12 +5,14 @@
 		-- 4. add these questions to ExamQuestions Table.
 
 alter proc generateExam
-@courseName varchar(30), @mcQuestionsNumber int, @tfQuestionsNumber int, @examDuration time(7)
+@courseName varchar(30), @mcQuestionsNumber int, @tfQuestionsNumber int
 as
 	begin
 
 		declare @crsID int
 		set @crsID = (select CourseID from Courses where  CourseName = @courseName)
+		declare @examDuration time(7);
+		set @examDuration = '00:20';
 
 		declare @examID int
 		set @examID = (select MAX(ExamID)+1 from Exams)
