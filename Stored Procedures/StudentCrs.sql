@@ -1,9 +1,9 @@
 -----------------------------------------Start Insert ----------------------------------------
-create proc InsertStudent @StID int , @CoID int
+create proc InsertStudentCourse @StID int , @CoID int
 with encryption
 as
 	begin try 
-		if not exists (select StudentID from StudentCrs where CourseID = @CoID)
+		if exists (select StudentID from Students where Students.StudentID = @StID)
 			insert into StudentCrs(StudentID , CourseID)
 			values(@StID,@CoID)
 		else 
@@ -13,20 +13,24 @@ as
 		select 'Find Error'
 	end catch
 
-	InsertStudent 1 , 1
+	InsertStudentCourse 201 , 2
+	exec InsertStudentCourse 200 , 1
+	exec InsertStudentCourse 202 , 2
+	exec InsertStudentCourse 203 , 1
+
 
 ---------------------------------------------End Insert -------------------------------------------
 
 
 ----------------------------Select-----------------------------------------------
 
-	create proc SelectStudent @sID int
+	create proc SelectStudentCourses @sID int
 with encryption
 as
 	begin try 
-		if exists(select StudentID from StudentCrs where CourseID=@sID)
-			select * from StudentCrs 
-			where CourseID=@sID
+		if exists(select StudentID from StudentCrs where StudentID=@sID)
+			select * from StudentCrs sc
+			where @sID=sc.StudentID
 		else
 			select 'Invalid  ID'
 	end try
@@ -34,34 +38,34 @@ as
 		select 'Find Error'
 	end catch
 
-	SelectStudent 1
+	SelectStudentCourses 201
 
 
 ---------------------------- End Select-----------------------------------------------
 -----------------------------Start Update---------------------------------------------
-create proc UpdateStudent @StuID int , @CoID int
+alter proc UpdateStudentCourse @StuID int , @CoID int, @newCourseID int
 with encryption
 as
 	begin try 
-		if exists (select StudentID from StudentCrs where CourseID = @CoID)
+		if exists (select CourseID from StudentCrs where StudentID = @StuID)
 			Update StudentCrs 
-			set StudentID = @StuID 
-			where CourseID = @CoID
+			set CourseID = @newCourseID 
+			where StudentID = @StuID
 		else select 'Invalid ID'
 	end try 
 	begin catch
 		select 'Find Error'
 	end catch
 
-UpdateStudent 2,1
+UpdateStudentCourse 204,2,1
 -----------------------------Start Update---------------------------------------------
 ------------------------------Start Delete ------------------------------------
-create proc DeletStudent @CoID int 
+alter proc DeletStudentCourse @stdID int,@CoID int 
 with encryption
 as
 	begin try 
-		if exists(select StudentID from StudentCrs where CourseID=@CoID)
-		delete from StudentCrs where CourseID = @CoID
+		if exists(select CourseID from StudentCrs where StudentID=@stdID)
+		delete from StudentCrs where CourseID = @CoID and StudentID=@stdID
 		else
 			select 'Invalid  ID'
 	end try
@@ -69,5 +73,5 @@ as
 		select 'Find Error  "DELETE statement conflicted with the REFERENCE constraint "FK_Students_Departments"'
 	end catch
 
-	DeletStudent 1
+	DeletStudentCourse 203,1
 ----------------------------------End Delete ----------------------------------

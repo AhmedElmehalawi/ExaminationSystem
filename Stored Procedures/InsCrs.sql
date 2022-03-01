@@ -1,9 +1,9 @@
 -----------------------------------------Start Insert ----------------------------------------
-create proc InsertInstructor @insID int , @CoID int
+create proc InsertInstructorCourse @insID int , @CoID int
 with encryption
 as
 	begin try 
-		if not exists (select InstructorID from InstructorCrs where CourseID = @CoID)
+		if  exists (select InstructorID from Instructors where Instructors.InstructorID = @insID)
 			insert into InstructorCrs(InstructorID, CourseID)
 			values(@insID,@CoID)
 		else 
@@ -13,20 +13,20 @@ as
 		select 'Find Error'
 	end catch
 
-	InsertInstructor 1, 1
+	--exec InsertInstructorCourse 103, 1
 	
 
 ---------------------------------------------End Insert -------------------------------------------
 
 ----------------------------Start Select -----------------------------------------------
 
-create proc SelectInstructor @InsID int
+alter proc SelectInstructorCourses @InsID int
 with encryption
 as
 	begin try 
-		if exists(select InstructorID from InstructorCrs where InstructorID=@InsID)
-			select * from InstructorCrs 
-			where InstructorID=@InsID
+		if exists(select ic.InstructorID from InstructorCrs ic where InstructorID=@InsID)
+			select * from InstructorCrs ic
+			where @InsID = ic.InstructorID
 		else
 			select 'Invalid  ID'
 	end try
@@ -34,32 +34,32 @@ as
 		select 'Find Error'
 	end catch
 
-	SelectInstructor 1
+	--SelectInstructorCourses 103
 
 ---------------------------- End Select-----------------------------------------------
 -----------------------------Start Update---------------------------------------------
-create proc UpdateCoIns @InsID int , @CoID int
+create proc UpdateInsCourse @InsID int , @CoID int, @newCourseID int
 with encryption
 as
 	begin try 
 		if exists (select CourseID from InstructorCrs where InstructorID = @InsID)
 			Update InstructorCrs 
-			set CourseID = @CoID
+			set CourseID = @newCourseID
 			where InstructorID = @InsID
 		else select 'Invalid ID'
 	end try 
 	begin catch
 		select 'Find Error'
 	end catch
-UpdateCoIns 1, 1
+--UpdateInsCourse 103,1, 2
 -----------------------------End Update---------------------------------------------
 ------------------------------Start Delete -------------------------------------------
-create proc DeletInstructor @InsID int 
+create proc DeletInstructorCourse @InsID int, @courseID int
 with encryption
 as
 	begin try 
-		if exists(select InstructorID from InstructorCrs where InstructorID=@InsID)
-		delete from InstructorCrs where InstructorID=@InsID
+		if exists(select CourseID from InstructorCrs where InstructorID=@InsID)
+		delete from InstructorCrs where CourseID= @courseID
 		else
 			select 'Invalid  ID'
 	end try
@@ -67,6 +67,6 @@ as
 		select 'Find Error  "DELETE statement conflicted with the REFERENCE constraint "FK_Students_Departments"'
 	end catch
 
-	DeletInstructor 1
+	--DeletInstructorCourse 103,2
 	
 ----------------------------------End Delete ----------------------------------
