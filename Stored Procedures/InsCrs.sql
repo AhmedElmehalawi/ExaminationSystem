@@ -59,7 +59,7 @@ with encryption
 as
 	begin try 
 		if exists(select CourseID from InstructorCrs where InstructorID=@InsID)
-		delete from InstructorCrs where CourseID= @courseID
+		delete from InstructorCrs where CourseID= @courseID and InstructorID = @InsID
 		else
 			select 'Invalid  ID'
 	end try
