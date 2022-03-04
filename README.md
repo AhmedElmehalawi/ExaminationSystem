@@ -21,8 +21,8 @@
     > Password: Admin </br>
   
   ![Screenshot (24)](https://user-images.githubusercontent.com/44305776/156583693-18fd86b9-922a-4bbe-87ea-5bf1b0b40575.png)
-  <hr>
-   Admin has the Abiility to View some Reports Based on our Database [as shown] </br>
+  
+  - Admin has the Abiility to View some Reports Based on our Database</br>
     1. Courses Topics. <br>
     2. Instructors Data. <br>
     3. Students Data. <br>
@@ -45,14 +45,12 @@
           - password: 14236547895634  
 
 
-  ![Screenshot (25)](https://user-images.githubusercontent.com/44305776/156584740-ffe79bf3-4994-4d80-8d6a-d3c6ebfcdd58.png)
-  <hr>
+  ![Screenshot (25)](https://user-images.githubusercontent.com/44305776/156584740-ffe79bf3-4994-4d80-8d6a-d3c6ebfcdd58.png) <hr>
   - After that, the student will be able to select
-    1. Course Name from the course list.
-    2. Number of MC Questions.
-    3. Number of TF Questions
+    1. Course Name from the course list. </br>
+    2. Number of MC Questions. </br>
+    3. Number of TF Questions. </br>
  
-- As Shown 
 ![Screenshot (26)](https://user-images.githubusercontent.com/44305776/156629725-09c745f6-2982-4187-942f-bec1523da13b.png)
 ![Screenshot (27)](https://user-images.githubusercontent.com/44305776/156629763-e7c90655-ac20-4675-8fae-1bcc6a021fab.png)
 ![Screenshot (28)](https://user-images.githubusercontent.com/44305776/156629777-d06d8f05-7c06-4eaa-9463-ec9499a0c71a.png)
